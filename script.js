@@ -42,8 +42,9 @@ var comment = localStorage.getItem("schedule");
 
 if (localStorage.getItem("date") === date && comment != null) {
     var commentObj = JSON.parse(comment);
+    
 for (i=0; i<commentObj.length; i++) {
-
+    schedule.push(commentObj[i]);
     var eventDivOld = $("<p>");
     var timeObj = commentObj[i]
     timeObjProp = Object.keys(timeObj)
