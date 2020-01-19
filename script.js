@@ -1,12 +1,12 @@
 moment().format();
-
+//Setting Variables for schedule storage and buttons
 var schedule = [];
 var slot = $(".slot");
 var comment = $(".comment");
 var save = $(".save");
 
 
-
+//getting time numbers
 var time = moment().format('MMMM Do YYYY, h:mm:ss a');
 var date = moment().format('MMMM Do YYYY');
 var hourMeridian = moment().format('ha');
@@ -15,6 +15,8 @@ var meridian = moment().format('a');
 console.log(hourMeridian);
 console.log(hour);
 console.log(meridian);
+
+//looping through divs to get colors set based on time number
 var allSlots =["8am","9am","10am","11am","12pm","1pm","2pm","3pm","4pm","5pm","6pm"];
 for (i=0; i<allSlots.length; i++) {
     var timeSlot = allSlots[i];
@@ -23,7 +25,8 @@ for (i=0; i<allSlots.length; i++) {
     var divTime = moment(momento,'ha');
     var nowTime = moment(hourMeridian,'ha');
     console.log(divTime.isBefore(nowTime));
-    
+    console.log(divTime.isAfter(nowTime));
+    console.log(divTime.isSame(nowTime));
     if (divTime.isSame(nowTime)){
         timeMomentDiv.attr("class","col-md-10 present slot");
         timeMomentDiv.children().attr("class","form-control present comment");
@@ -37,6 +40,7 @@ for (i=0; i<allSlots.length; i++) {
 
      
 };
+//filling out schedule with local storage items
 var comment = localStorage.getItem("schedule");
 
 
@@ -57,7 +61,7 @@ for (i=0; i<commentObj.length; i++) {
     localStorage.clear();
 };
 
-
+//Displays current day
 dayDiv = $("#currentDay");
 
 dayDiv.text(time)
@@ -65,7 +69,7 @@ dayDiv.text(time)
 
 
 
-
+//event handler for saving events both to div and local storage
 save.on("click", function(){
     localStorage.setItem("date",date)
     var eventParent = $(this).parent().parent();
